@@ -6,7 +6,21 @@ Example: <br>
 2. Query the due date ticket and reminder assignee on the Slack channel.
 3. Generate a report and record it on Confluence or send it via email.
 
----
+### Tech Stack
+
+|                                       |                          |
+|---------------------------------------|--------------------------|
+| Backend Framework                     | Python Flask             |
+| Integration Tool - Atlassian package  | atlassian-python-api     |
+| Integration Tool - Slack package      | slack_sdk                |
+| Integration Tool - Slack bolt package | slack_bolt               |
+| Integration Tool - Google             | google-api-python-client |
+| Database                              | MySQL                    |
+| Containerization                      | Docker                   |
+| CI/CD                                 | Gitlab CI                |
+
+
+----
 
 # Dev Mode, Deployment, Debug
 ### Dev Mode
