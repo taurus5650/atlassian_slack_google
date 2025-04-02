@@ -1,0 +1,35 @@
+before_script:
+  - chmod -R +w .
+
+deploy:
+  stage: deploy
+  timeout: 10m
+  tags:
+    - shell_runner
+  variables:
+    DOCKER_IMAGE: ags_integration_hub_image
+    PORT: 8790
+
+  before_script:
+    - echo "Current Directory $(pwd)"
+    # Check if the port is in use and kill the process
+    - |
+      if pids=$(sudo lsof -i:${PORT} -t); then
+          echo "Port ${PORT} is occupied, killing process(es): $pids"
+          sudo kill $pids || echo "Failed to kill process(es): $pids"
+      fi
+
+  script:
+    - export SLACK_BOT_TOKEN=${SLACK_BOT_TOKEN}
+    - export SLACK_SIGNING_SECRET=${SLACK_SIGNING_SECRET}
+    - export SLACK_APP_TOKEN=${SLACK_APP_TOKEN}
+    - export FLASK_SECRET_KEY=${FLASK_SECRET_KEY}
+    - export ATLASSIAN_API_TOKEN=${ATLASSIAN_API_TOKEN}
+    - export TZ=Asia/Taipei
+    - nohup make run-prod
+
+  only:
+    refs:
+      - master
+    changes:
+      - "*"

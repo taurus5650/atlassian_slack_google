@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  app:
+    image: ags_integration_hub_image:latest
+    container_name: ags_integration_hub
+    build:
+      context: ..
+      dockerfile: ags_deployment/Dockerfile
+    restart: always
+    environment:
+      - SLACK_BOT_TOKEN=${SLACK_BOT_TOKEN}
+      - SLACK_SIGNING_SECRET=${SLACK_SIGNING_SECRET}
+      - SLACK_APP_TOKEN=${SLACK_APP_TOKEN}
+      - FLASK_SECRET_KEY=${FLASK_SECRET_KEY}
+      - ATLASSIAN_API_TOKEN=${ATLASSIAN_API_TOKEN}
+
+      - FLASK_APP=run.py
+      - FLASK_ENV=production
+    volumes:
+      - ../:/app
+    ports:
+      - "8790:8790"
+    command: python3 /app/run.py
+    networks:
+      - custom_network
+
+networks:
+  custom_network:
+    name: ags_integration_hub_network

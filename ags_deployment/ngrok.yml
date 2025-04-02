@@ -1,0 +1,9 @@
+version: "2"
+authtoken: ***REMOVED***
+update: false
+log: stdout
+
+tunnels:
+  basic:
+    proto: http
+    addr: app:8790
