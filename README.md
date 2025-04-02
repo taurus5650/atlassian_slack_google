@@ -29,6 +29,19 @@ Which have same request_id in one workflow.
 - Dockerfile
 
 
+# New Environment Set up
+Before development, create `.env` file under `/ags_deployment`. <br>
+Add the content below: <br>
+```cd
+SLACK_BOT_TOKEN='SLACK_BOT_TOKEN'
+SLACK_SIGNING_SECRET='SLACK_SIGNING_SECRET'
+SLACK_APP_TOKEN='SLACK_APP_TOKEN'
+
+FLASK_SECRET_KEY='FLASK_SECRET_KEY'
+ATLASSIAN_API_TOKEN = 'ATLASSIAN_API_TOKEN
+```
+![env.png](readme/env.png)
+
 # Operation / Testing
 #### Request API
 Example: <br>
