@@ -6,6 +6,7 @@ Example: <br>
 2. Query the due date ticket and reminder assignee on the Slack channel.
 3. Generate a report and record it on Confluence or send it via email.
 
+---
 
 # Dev Mode, Deployment, Debug
 ### Dev Mode
@@ -21,6 +22,8 @@ $ make run-dev-docker-ngrok
 
 ### Debug
 Which have same request_id in one workflow.
+
+![log.png](readme/log.png)
 
 ### Deployment
 - .gitlab-ci.yml
@@ -39,6 +42,7 @@ SLACK_APP_TOKEN='SLACK_APP_TOKEN'
 FLASK_SECRET_KEY='FLASK_SECRET_KEY'
 ATLASSIAN_API_TOKEN = 'ATLASSIAN_API_TOKEN
 ```
+![env.png](readme/env.png)
 
 
 # Operation / Testing
@@ -49,4 +53,4 @@ curl --location 'http://127.0.0.1:8790/api/example/get_google_sheet'
 ```
 ### Result
 Example: <br>
-
+![slack.png](readme/slack.png)
