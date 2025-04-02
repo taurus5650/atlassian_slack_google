@@ -21,7 +21,6 @@ $ make run-dev-docker-ngrok
 
 ### Debug
 Which have same request_id in one workflow.
-![log.png](readme/log.png)
 
 ### Deployment
 - .gitlab-ci.yml
@@ -40,7 +39,7 @@ SLACK_APP_TOKEN='SLACK_APP_TOKEN'
 FLASK_SECRET_KEY='FLASK_SECRET_KEY'
 ATLASSIAN_API_TOKEN = 'ATLASSIAN_API_TOKEN
 ```
-![env.png](readme/env.png)
+
 
 # Operation / Testing
 #### Request API
@@ -50,4 +49,4 @@ curl --location 'http://127.0.0.1:8790/api/example/get_google_sheet'
 ```
 ### Result
 Example: <br>
-![slack.png](readme/slack.png)
+
