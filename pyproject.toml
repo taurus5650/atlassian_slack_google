@@ -1,31 +1,14 @@
-[project]
-name = "atlassian_google_slack_integration_hub"
+[tool.poetry]
+name = "atlassian-slack-google"
 version = "0.1.0"
 description = ""
-authors = [
-    {name = "shyin.lim.jkopay",email = "shyin.lim@jkopay.com"}
-]
+authors = ["taurus5650 <taurus_5650@hotmail.com>"]
 readme = "README.md"
-requires-python = ">=3.11,<4.0"
-dependencies = [
-    "slack-sdk (>=3.35.0,<4.0.0)",
-    "slack-bolt (>=1.23.0,<2.0.0)",
-    "flask (>=3.1.0,<4.0.0)",
-    "atlassian-python-api (>=3.41.21,<4.0.0)",
-    "flask-cors (>=5.0.1,<6.0.0)",
-    "aenum (>=3.1.15,<4.0.0)",
-    "routes (>=2.5.1,<3.0.0)",
-    "pymysql (>=1.1.1,<2.0.0)",
-    "python-tds (>=1.16.0,<2.0.0)",
-    "pymongo (>=4.11.3,<5.0.0)",
-    "pydantic (>=2.10.6,<3.0.0)",
-    "lxml (>=5.3.1,<6.0.0)",
-    "google (>=3.0.0,<4.0.0)",
-    "google-api-python-client (>=2.166.0,<3.0.0)",
-    "pygsheets (>=2.0.6,<3.0.0)"
-]
+
+[tool.poetry.dependencies]
+python = "^3.13"
 
 
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
+requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
