@@ -19,7 +19,8 @@ class AtlassianJira:
         )
 
     @log_func
-    def query_by_jql(self, jql: Any, username: str = None, password: str = None) -> List[Dict[str, Any]]:
+    def query_by_jql(self, jql: Any, username: str = None,
+                     password: str = None) -> List[Dict[str, Any]]:
         """ Get ticket from JQL search result with all related fields. """
         jira_server = self._connection(
             username=username or AtlassianConnectionConfig.USER_NAME,
@@ -45,7 +46,8 @@ class AtlassianJira:
             raise
 
     @staticmethod
-    def _query_by_jql_resp(ticket: Dict[str, Any], resp_id: int) -> Dict[str, Any]:
+    def _query_by_jql_resp(
+            ticket: Dict[str, Any], resp_id: int) -> Dict[str, Any]:
         """ Extract and format data from a single Jira ticket. """
         fields = ticket.get('fields', {})
         ticket_key = ticket.get('key', 'UNKNOWN')
@@ -104,10 +106,10 @@ class AtlassianJira:
         }
 
         if assignee:
-            fields['assignee'] = {'accountId': assignee}  # ToDo: 只能用 AccountId, Email 無效
+            fields['assignee'] = {'accountId': assignee} # # ToDo: Only can use AtlassianId cannot use email
 
         if issue_validator:
-            fields['customfield_10088'] = {'accountId': issue_validator}  # ToDo: 只能用 AccountId, Email 無效
+            fields['customfield_10088'] = {'accountId': issue_validator}  # ToDo: Only can use AtlassianId cannot use email
 
         if parent_ticket:
             fields['parent'] = {'key': parent_ticket}
@@ -126,53 +128,4 @@ class AtlassianJira:
             return create_response
         except Exception as e:
             logger.error(f"Failed to create ticket: {str(e)}")
-            raise
-
-    @staticmethod
-    def _get_current_sprint(sprints: Any):
-        today = datetime.now()
-        week_start = today - timedelta(days=today.weekday())
-        week_end = week_start + timedelta(days=6)
-
-        week_start = week_start.replace(hour=0, minute=0, second=0, microsecond=0)
-        week_end = week_end.replace(hour=23, minute=59, second=59, microsecond=999999)
-
-        for sprint in sprints['values']:
-            if sprint['name'].startswith('SDET'):
-                if 'startDate' in sprint:
-                    sprint_start = datetime.strptime(sprint['startDate'], '%Y-%m-%dT%H:%M:%S.%fZ')
-
-                    if week_start <= sprint_start <= week_end:
-                        return sprint
-
-        return None
-
-    def get_new_sprint(self, board_id: int = 76, limit: int = 50, username: str = None, password: str = None):
-        """ Get new sprint value. """
-        jira_server = self._connection(
-            username=username or AtlassianConnectionConfig.USER_NAME,
-            password=password or AtlassianConnectionConfig.ATLASSIAN_API_TOKEN
-        )
-
-        try:
-            total_sprints = jira_server.get_all_sprints_from_board(
-                board_id=board_id,
-                start=0,
-                limit=limit
-            )['total']
-
-            start = total_sprints - limit
-
-            new_sprints = jira_server.get_all_sprints_from_board(
-                board_id=board_id,
-                start=start,
-                limit=limit
-            )
-
-            new_sprint = self._get_current_sprint(sprints=new_sprints)
-            # logger.info(f"New sprint: {new_sprint}")
-            return new_sprint
-
-        except Exception as e:
-            logger.error(f"Exception: {str(e)}")
             raise
