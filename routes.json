@@ -1,0 +1,36 @@
+[
+    {
+        "feature_path": "feature/demo",
+        "url_prefix": "/demo",
+        "routes": [
+            {
+                "name": "demo_qjts_route",
+                "module": "query_jira_to_slack"
+            }
+        ]
+    },
+    {
+        "feature_path": "feature/example",
+        "url_prefix": "/example",
+        "routes": [
+            {
+                "name": "example_sbqf_route",
+                "module": "slack_bolt_app_feat"
+            },
+            {
+                "name": "example_ggs_route",
+                "module": "get_google_sheet"
+            }
+        ]
+    },
+    {
+        "feature_path": "feature/slack_btn",
+        "url_prefix": "/slack_btn",
+        "routes": [
+            {
+                "name": "slack_btn_smsj_route",
+                "module": "btn_create_jira"
+            }
+        ]
+    }
+]
