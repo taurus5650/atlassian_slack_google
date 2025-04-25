@@ -67,4 +67,4 @@ curl --location 'http://127.0.0.1:8790/api/example/get_google_sheet'
 ```
 ### Result
 Example: <br>
-![slack.png](readme/slack.png)
+![slack.png](readme/slack_v2.png)
